@@ -37,28 +37,9 @@ void LectorArchivo::calcularCantVariables()
 
     }
 }
-void LectorArchivo::cargarMatriz(int matriz[4][4])
+void LectorArchivo::cargarMatriz(int matriza[6][6])
 {
-    string valorStr;
-    int indice=0;
-    if(this->textoStr!="")
-    {
-        for(int fila = 0; fila <cantVariables ; fila++)
-        {
-            for(int columna = 0; columna <cantVariables ; columna++ )
-            {
-                valorStr="";
-                while(this->textoStr[indice]!=',' && this->textoStr[indice]!='\n')
-                {
-                    valorStr+=this->textoStr[indice++];
-                }
-                indice++;
-                matriz[fila][columna]= atoi(valorStr.c_str());
-            }
-        }
 
-
-    }
 }
 int LectorArchivo::getCantVariables()
 {

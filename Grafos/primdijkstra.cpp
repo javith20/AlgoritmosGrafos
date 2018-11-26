@@ -2,24 +2,36 @@
 
 PrimDijkstra::PrimDijkstra()
 {
+    //A=65 B=66 C=67 D=68 E=69 F=70
+    /*
+    for(int letra=65; letra<71 ; letra++)
+        crearVertice(letra);
+    enlazarVertices('A','B',2);
+    enlazarVertices('A','D',1);
+    enlazarVertices('A','F',6);
+    enlazarVertices('A','E',3);
+    enlazarVertices('B','C',2);
+    enlazarVertices('B','D',3);
+    enlazarVertices('C','D',4);
+    enlazarVertices('F','E',4);*/
+    cargarArchivo();
 
 }
 
-void crearVertice (char valor) {
+void PrimDijkstra::crearVertice (char valor) {
      if (pri == NULL){
         pri = new vertice;
-        //cout << "El Grafo no tiene vertices\nDigite la letra del Primer Nodo: ";
         pri->nod = valor;
         pri->marca = 0;
         pri->arc = NULL;
         pri->sig = NULL;
         ult = pri;
-        cout << "\nNodo registrado correctamente.";
+
      }
      else {
-          cout << "Digite la letra del vertice: ";
+
           let = valor;
-          do {
+          /*do {
               aux = pri;
               ban = 0;
               while (aux != NULL){
@@ -38,7 +50,7 @@ void crearVertice (char valor) {
                      cout << "\nDigita una letra diferente: ";
                      cin >> let;
               }
-          }while (ban == 1);
+          }while (ban == 1);*/
           nue = new vertice;
           nue->nod = let;
           nue->marca = 0;
@@ -46,24 +58,22 @@ void crearVertice (char valor) {
           nue->arc = NULL;
           ult->sig = nue;
           ult = nue;
-          cout << "\nNodo registrado correctamente.";
 
      }
 
-     ////getch();
 }
 
-void enlazarVertices (char inicioNodo,char finNodo,int valor) {
-     system ("cls");
+void PrimDijkstra::enlazarVertices (char inicioNodo,char finNodo,int valor) {
      if (pri != NULL){
         aux = pri;
-        while (aux != NULL){
+        /*while (aux != NULL){
               cout << aux->nod << "\n";
               aux = aux->sig;
         }
         cout << "\nDigite la letra del nodo al cual desea enlazar: ";
-         auxNod = inicioNodo; /// Guarda el valor del nodo inicial
-        ban = 0;
+        */
+        auxNod = inicioNodo; /// Guarda el valor del nodo inicial
+        /*ban = 0;
         while (ban == 0){
               aux = pri;
               while (aux != NULL && ban == 0){
@@ -99,42 +109,45 @@ void enlazarVertices (char inicioNodo,char finNodo,int valor) {
               }
 
               aux = aux->sig;
-        }
-        cout << "\nDigite la letra del nodo al cual desea enlazar el nodo elegido: ";
+        }*/
+       // cout << "\nDigite la letra del nodo al cual desea enlazar el nodo elegido: ";
         auxNod2=finNodo;
         ban = 0;
         while (ban == 0){
               aux = pri;
+              /*
               while (auxNod2 == auxNod){
                     cout << "\nNo se puede hacer ese enlace\nDigite otro nodo disponible: ";
                     cin >> auxNod2;
-              }
+              }*/
               while (aux != NULL && ban == 0){
                    if (aux->nod == auxNod2){
                       ban = 1;
                    }
                    aux = aux->sig;
-              }
+              }/*
               if (ban == 0){
                  cout << "\nEl nodo no existe\nPor favor digite uno de los listados anteriormente: ";
                  cin >> auxNod2;
-              }
+              }*/
         }
         aux = pri;
+        /*
         while (aux->nod != auxNod){
               aux = aux->sig;
-        }
+        }*/
         auxArc = aux->arc;
         ban3 = 0;
+        /*
         while (auxArc != NULL && ban3 == 0){
-              if (auxArc->ver->nod == auxNod2){
+              if (auxArc->ver->nod == auxNod2  ){
                  ban3 = 1;
               }
               auxArc = auxArc->sig;
-        }
+        }*/
         if (ban3 == 0){
            enlazar(valor);
-           cout << "\nEnlace creado correctamente.";
+           //cout << "\nEnlace creado correctamente.";
         }
         else {
              cout << "\nEse enlace ya existe. Compruebe el enlace la proxima vez.";
@@ -142,7 +155,7 @@ void enlazarVertices (char inicioNodo,char finNodo,int valor) {
      }
 }
 
-void enlazar (int valor){
+void PrimDijkstra::enlazar (int valor){
         aux = pri;
         while (aux->nod != auxNod){
               aux = aux->sig;
@@ -154,11 +167,10 @@ void enlazar (int valor){
         if (aux->arc == NULL){
            nueArc = new arco;
            nueArc->ver = aux2;
-           cout << "\nDigite el valor del enlace: ";
            enlace = valor; // Asigna el valor del peso
            while (nueArc->clave < 0){
                  cout << "\nEl valor debe ser positivo\nDigite el valor del enlace: ";
-                 cin >> enlace;
+                 enlace = valor;
            }
            nueArc->clave = enlace;
            nueArc->marca = 0;
@@ -191,7 +203,7 @@ void enlazar (int valor){
         else {
            nueArc = new arco;
            nueArc->ver = aux2;
-           cout << "\nDigite el valor del enlace: ";
+          // cout << "\nDigite el valor del enlace: ";
             enlace = valor; // Asigna el valor del peso
            while (enlace < 0){
                  cout << "\nEl valor debe ser positivo\nDigite el valor del enlace: ";
@@ -231,7 +243,7 @@ void enlazar (int valor){
         }
 }
 
-void obtenerArcoMenor () {
+void PrimDijkstra::obtenerArcoMenor () {
      aux2 = pri;
      arcMen = NULL;
      while (aux2 != NULL){
@@ -257,7 +269,7 @@ void obtenerArcoMenor () {
      arcMen->ver->marca = 1;
 }
 
-void obtenerSumaMenor () {
+void PrimDijkstra::obtenerSumaMenor () {
      aux2 = pri;
      arcMen = NULL;
      while (aux2 != NULL){
@@ -288,7 +300,7 @@ void obtenerSumaMenor () {
      }
 }
 
-void paso2 (){
+void PrimDijkstra::paso2 (){
             obtenerArcoMenor();
             cout << "\nEl arco menor es: "<< arcMen->ver->nod << " vale: " << arcMen->clave;
             //////getch();
@@ -327,7 +339,7 @@ void paso2 (){
             }
 }
 
-void paso2Dijkstra () {
+void PrimDijkstra::paso2Dijkstra () {
             obtenerSumaMenor();
             cout << "\nLa sumatoria hasta el arco " << arcMen->ver->nod << " es: "<< arcMen->suma;
             ////getch();
@@ -367,11 +379,10 @@ void paso2Dijkstra () {
             }
 }
 
-void algoritmoPrim (char vertice) {
+void PrimDijkstra::algoritmoPrim (char vertice) {
      system("cls");
      if (pri != NULL){
             actualizarCampos();
-            cout << "Digite el vertice inicial: ";
             auxNod= vertice;
             ban = 0;
             while (ban == 0){
@@ -423,7 +434,7 @@ void algoritmoPrim (char vertice) {
      ////getch();
 }
 
-void listarAdyacencia () {
+void PrimDijkstra::listarAdyacencia () {
      system ("cls");
      if (pri != NULL){
         aux = pri;
@@ -441,7 +452,7 @@ void listarAdyacencia () {
      }
 }
 
-void sumaCaminos () {
+void PrimDijkstra::sumaCaminos () {
      aux = pri;
      int suma = 0;
      while (aux != NULL){
@@ -457,7 +468,7 @@ void sumaCaminos () {
      cout << "\nLa suma de los caminos es: " << suma;
 }
 
-void listarAdyacenciaPrim () {
+void PrimDijkstra::listarAdyacenciaPrim () {
      if (pri != NULL){
         aux = pri;
         cout << "\n---Lista de Adyacencia---\n";
@@ -474,7 +485,7 @@ void listarAdyacenciaPrim () {
      }
 }
 
-void liberarMemoria () {
+void PrimDijkstra::liberarMemoria () {
      if (pri != NULL){
         aux = pri;
         while (aux != NULL){
@@ -493,8 +504,7 @@ void liberarMemoria () {
      ////getch();
 }
 
-
-void algoritmoDijkstra (char vertice ) {
+void PrimDijkstra::algoritmoDijkstra (char vertice ) {
      system("cls");
      if (pri != NULL){
             actualizarCampos ();
@@ -549,23 +559,8 @@ void algoritmoDijkstra (char vertice ) {
      }
      ////getch();
 }
-void cargarArchivo(){
-    a.leer("C:/Users/Javith/Documents/AlgoritmosGrafos/1.txt");
-    cout << a.getTextoStr() << endl;
-    int dimension = a.getCantVariables();
-    int matriz[4][4];
-    a.cargarMatriz(matriz);
-    int op = 0;
-    for(int letra=65; letra<69 ; letra++)
-        crearVertice(letra);
 
-    for(int fila = 65; fila <69 ; fila++)
-        for(int columna = 65; columna < 69 ;columna++)
-            if(matriz[fila-65][columna-65]!=999 && fila !=columna)
-                enlazarVertices(fila,columna,matriz[fila-65][columna-65]);
-
-}
-void actualizarCampos () {
+void PrimDijkstra::actualizarCampos () {
      aux = pri;
      while (aux != NULL){
            auxArc = aux->arc;
@@ -579,47 +574,58 @@ void actualizarCampos () {
      }
 }
 
-main (){
-    cargarArchivo();
+void PrimDijkstra::cargarArchivo(){
+    lectorArchivos.leer("C:/Users/Javith/Documents/GitHub/AlgoritmosGrafos/AlgoritmosGrafos/1.txt");
+    /*----------------------------Cargar Matriz---------
+    Esta funcion debe ir aparte pero por problemas con la matriz la
+    voy a dejar por aca.
+    */
+    int matriz[6][6];
+    string valorStr;
+    int indice=0;
+    string textoStr =this->lectorArchivos.getTextoStr();
+    if( textoStr !="")
+    {
+        for(int fila = 0; fila <this->lectorArchivos.getCantVariables() ; fila++)
+        {
+            for(int columna = 0; columna <this->lectorArchivos.getCantVariables() ; columna++ )
+            {
+                valorStr="";
+                while(textoStr[indice]!=',' && textoStr[indice]!='\n')
+                {
+                    valorStr+=textoStr[indice++];
+                }
+                indice++;
+                matriz[fila][columna]= atoi(valorStr.c_str());
+            }
+        }
+
+    }
+
+    //---------------------------------------------------------
+    lectorArchivos.cargarMatriz(matriz);
+    int op = 0;
+    for(int letra=65; letra<71 ; letra++)
+        crearVertice(letra);
+    int valorColumna=66;
+    for(int fila = 65; fila <71 ; fila++)
+    {
+        for(int columna = valorColumna++; columna < 71 ;columna++)
+            if(matriz[fila-65][columna-65]!=0 && fila !=columna)
+            {
+                enlazarVertices(fila,columna,matriz[fila-65][columna-65]);
+                kruskal.grafo.push_back(pair<int,ii>(matriz[fila-65][columna-65],ii(fila-65,columna-65)));
+            }
+
+    }
 
 
 
-    algoritmoDijkstra('A');
+
 }
-    /*
-    do{
-       system("cls");
-       cout<<"---UNIVERSIDAD DE NARIÑO---";
-       cout<<"\n---FACULTAD DE INGENIERIA---";
-       cout<<"\n     INGENIERIA DE SISTEMAS";
-       cout<<"\n---TALLER 03. GRAFOS---";
-       cout<<"\nRealizado Por:";
-       cout<<"\n\nMario Florez";
-       cout<<"\nMarcelo Tabango";
-       cout<<"\n\n-----MENU-----";
-       cout<<"\n1. Crear Vertices.";
-       cout<<"\n2. Enlazar Vertices.";
-       cout<<"\n3. Listar Vertices con su lista de adyacencia.";
-       cout<<"\n4. Algoritmo de Prim.";
-       cout<<"\n5. Algoritmo de Dijkstra.";
-       cout<<"\n6. Liberar Memoria.";
-       cout<<"\n7. Salir";
-       cout<<"\n\nDigite la Opcion:==>";
-       cin>>op;
-       while (op>7){
-             cout << "Esa opcion no existe digite un numero del 1 al 7: ";
-             cin >> op;
-       }
-       switch(op){
-                  case 1: crearVertice('a'); break;
-                  case 2: enlazarVertices('a','a',1); break;////getch();
-                  case 3: listarAdyacencia(); break;
-                  case 4: algoritmoPrim(); break;
-                  case 5: algoritmoDijkstra(); break;
-                  case 6: liberarMemoria (); break;
-                  case 7: exit (0);
-       }
-    }while(op<7);
-}*/
+
+void PrimDijkstra::algoritmoKruskal(){
+    kruskal.kruskal(8);
+}
 
 

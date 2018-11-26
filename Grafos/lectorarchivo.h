@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
-#include "listaenlazada.h"
 using namespace std;
 class LectorArchivo
 {
@@ -13,7 +12,7 @@ public:
     LectorArchivo();
     void LeerArchivos();
     void leer(string rutaStr);
-    void cargarMatriz(int matriz[4][4] );
+    void cargarMatriz(int matriz[6][6]);
     string getTextoStr();
     int getCantVariables();
 private:
